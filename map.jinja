@@ -1,0 +1,9 @@
+{% set keytab = salt['grains.filter_by']({
+    'default': {
+      'krb_package': 'krb5-workstation',
+      'princs': [{
+        'princ': 'host/' + salt['grains.get']('id') + '@EXAMPLE.COM',
+        'keytab': '/etc/krb5.keytab',
+      }]
+    },
+}, merge=salt['pillar.get']('keytab:lookup'), base='default') %}
