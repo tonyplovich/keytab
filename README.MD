@@ -27,12 +27,13 @@ mkdir -p /srv/pillar/keytabs/id
 5. Configure the "CONFIGURE THESE!" items in _runners/princ.py.
 
 6. Create a keytab file on the salt master with the credentials of the user that will be used to provision principals:
-
-> ktutil
-> addent -password -p YOURUSER@EXAMPLE.COM -k 4 -e arcfour-hmac-md5
-> addent -password -p YOURUSER@EXAMPLE.COM -k 4 -e aes128-cts-hmac-sha1-96
-> addent -password -p YOURUSER@EXAMPLE.COM -k 4 -e aes256-cts-hmac-sha1-96 
-> wkt /root/ktprov.keytab
+````
+ktutil
+addent -password -p YOURUSER@EXAMPLE.COM -k 4 -e arcfour-hmac-md5
+addent -password -p YOURUSER@EXAMPLE.COM -k 4 -e aes128-cts-hmac-sha1-96
+addent -password -p YOURUSER@EXAMPLE.COM -k 4 -e aes256-cts-hmac-sha1-96 
+wkt /root/ktprov.keytab
+````
 
 7. On your master, make sure kadmin (or msktutil / k5start for AD) is installed and /etc/krb5.conf is configured.
 
