@@ -29,7 +29,7 @@ def add(princ,
 
   # Provision the principal
   if kdc_type == 'ad':
-    subprocess.call('k5start {2} -f {3} -k /tmp/krbcc_keytab_state -- msktutil -b "{4}" -k {0}/{{1} -h {5} -s {6} --computer-name {7}'.format(tmp_keytab_dir, tmp_keytab, keytab_prov_user, keytab_prov_creds, ad_dir, fqdn, princ_type, ad_comp_name), shell=True)
+    subprocess.call('k5start {2} -f {3} -k /tmp/krbcc_keytab_state -- msktutil -b "{4}" -k {0}/{1} -h {5} -s {6} --computer-name {7}'.format(tmp_keytab_dir, tmp_keytab, keytab_prov_user, keytab_prov_creds, ad_dir, fqdn, princ_type, ad_comp_name), shell=True)
   else:
     subprocess.call('echo -e "ank -randkey {4}\nktadd -k {0}/{1} {4}" | kadmin -p {2} -k -t {3}'.format(tmp_keytab_dir, tmp_keytab, keytab_prov_user, keytab_prov_creds, princ), shell=True)
 

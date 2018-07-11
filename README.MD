@@ -4,15 +4,17 @@ Salt forumula to provision Kerberos principals and keytab files securely.
 ## Usage
 Configure these on your Salt master:
 1. Add the following reactor:
-
->      reactor:
->       - 'princ/add':
->         - /srv/PATH/TO/YOUR/keytab/files/react/princ_add.sls
+````
+      reactor:
+       - 'princ/add':
+         - /srv/PATH/TO/YOUR/keytab/files/react/princ_add.sls
+````
 
 2. Add a PillarStack ext_pillar to hold the keytabs (do NOT make this available via the Salt fileserver):
-
->      ext_pillar:
->       - stack: /srv/pillar/keytabs/core.cfg
+````
+      ext_pillar:
+       - stack: /srv/pillar/keytabs/core.cfg
+````
 
 4. Create the PillarStack keytab directory and drop the cfg file in:
 
@@ -20,7 +22,9 @@ mkdir -p /srv/pillar/keytabs/id
 
 /srv/pillar/keytabs/core.cfg:
 
->    id/{{ __grains__['id'] }}.yml
+````
+    id/{{ __grains__['id'] }}.yml
+````
 
 4. Add the contents of the keytab/files/_{runners,states,modules} directories to corresponding _runners, _states, or _modules directory within the root of one of your configured file_roots. (There are a few ways to tell Salt how to find custom extensions, check your master config).
 
@@ -38,10 +42,12 @@ wkt /root/ktprov.keytab
 7. On your master, make sure kadmin (or msktutil / k5start for AD) is installed and /etc/krb5.conf is configured.
 
 ## Pillar Example
->     keytab:
->      princs:
->        - princ: host/SOME.HOST.HERE@EXAMPLE.COM
->          keytab: /etc/krb5.keytab
+````
+     keytab:
+      princs:
+        - princ: host/SOME.HOST.HERE@EXAMPLE.COM
+          keytab: /etc/krb5.keytab
+````
 ## How It Works:
 1. The custom state checks if the specified principal exists in the specified keytab.
   If not, fire an event to the master and sleep for 5 seconds.

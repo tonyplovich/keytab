@@ -19,5 +19,5 @@ add_{{ princ['princ'] }}:
     - name: {{ princ['princ'] }}
     - keytab: {{ princ['keytab'] }}
     - require:
-      - krb_princ: provision_{{ princ['princ'] }}
+      - princ: provision_{{ princ['princ'] }}
 {% endfor %}
