@@ -44,9 +44,10 @@ wkt /root/ktprov.keytab
 ## Pillar Example
 ````
      keytab:
-      princs:
-        - princ: host/SOME.HOST.HERE@EXAMPLE.COM
-          keytab: /etc/krb5.keytab
+       lookup:
+        princs:
+          - princ: host/SOME.HOST.HERE@EXAMPLE.COM
+            keytab: /etc/krb5.keytab
 ````
 ## How It Works:
 1. The custom state checks if the specified principal exists in the specified keytab.
